@@ -1,0 +1,100 @@
+@import "./boostrap/app.scss";
+
+  /*
+   * Sidebar
+   */
+
+   button {
+    font-family: "Gill Sans", sans-serif !important;
+   }
+  
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+  }
+  
+  /* Sidebar navigation */
+  .sidebar {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .sidebar .nav {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar .nav-item {
+    width: 100%;
+  }
+  
+  .sidebar .nav-item + .nav-item {
+    margin-left: 0;
+  }
+  
+  .sidebar .nav-link {
+    border-radius: 0;
+  }
+
+  .save-button {
+    width: 200px;
+  }
+  
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.dashboardTitle {
+  text-align: center;
+  font-size: 175%;
+  color: #fff;
+}
+
+.dashboardTitleCard {
+  background-color: #3c8dff;
+  border-radius: 30px;
+  font-family: "Gill Sans", sans-serif !important;
+}
+
+.table-custom {
+  --bs-table-bg: #d4d4d4;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.808);
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #bacbe6;
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: rgb(99, 99, 99);
+  --bs-table-hover-color: #s;
+  color: #000;
+  border-color: #000;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.border-custom {
+  border: 0.1px solid;
+}
+
+.input-group-text {
+  opacity: 1 !important;
+  color: #fff !important;
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
