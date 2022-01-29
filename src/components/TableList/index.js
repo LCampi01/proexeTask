@@ -9,62 +9,6 @@ import Pages from './Pages';
 import Item from './Item';
 import MobileItem from './MobileItem';
 
-/**
- * @param {Object} Object
- * @param {Array} Object.headers
- *
- * @param {columns}
- * @example
- * [
- *   {
- *      text: 'Nombre',
- *      label: 'user.name'
- *   },
- *   {
- *       text: 'Apellido',
- *       label: 'user.surname'
- *   },
- *   {
- *       text: 'Email',
- *       label: 'user.email'
- *   },
- *   {
- *       text: 'Celular',
- *       label: 'user.phone'
- *   },
- *   {
- *       text: 'CUIT',
- *       label: 'company[cuit]'
- *   },
- *   {
- *       text: 'Cargo',
- *       label: 'user.position'
- *   },
- *   {
- *       draw: true,
- *       detail: true,
- *       noInfo: true,
- *       label: ['user.name', 'user.surname']
- *   },
- *   {
- *       draw: true,
- *       noInfo: true,
- *       text: 'Empresa',
- *       label: ['company.businessName', 'company.cuit']
- *   },
- *   {
- *       draw: true,
- *       noInfo: true,
- *       label: 'Editar',
- *       linkTo: '/users/edit/'
- *   },
- *   {
- *       draw: true,
- *       noInfo: true,
- *       deleteAction: true
- *   }
- * ]
- */
 const TableList = ({
     information,
     primaryKey,

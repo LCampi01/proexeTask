@@ -9,7 +9,7 @@ import ModalWithDynamicButtons from '@components/ModalWithDynamicButtons';
 
 const Columns = (getUserToEdit, deleteUserRequested) => [
     {
-        detail: true,
+        detail: false,
         draw: true,
         text: 'ID',
         label: 'id'
