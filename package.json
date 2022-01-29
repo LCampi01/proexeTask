@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
+    "build": "webpack --config ./webpack.config.prod.js",
     "dev": "node index",
     "lint": "eslint --ext .js,.jsx ./src && eslint --ext .js,.jsx ./test",
     "lint:fix": "eslint --ext .js,.jsx ./src --fix && eslint --ext .js,.jsx ./test --fix",
@@ -91,6 +92,7 @@
     "stylelint-scss": "^3.20.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.51.1",
+    "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^5.0.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-subresource-integrity": "^5.0.0"
