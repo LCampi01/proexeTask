@@ -8,7 +8,7 @@ const Footer = () => {
         window.location = route;
     };
     return (
-        <div color='dark' className=" text-center text-light bg-dark">
+        <div color='dark' className="footer-height text-center text-light bg-dark">
             <h1>User management Dashboard</h1>
         </div>
     );

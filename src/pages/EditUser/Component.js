@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import PropTypes from 'prop-types';
 import {
-  Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col
+  Button, Form, FormGroup, Label, Input, Container, Row, Col
 } from 'reactstrap';
 
 import isEmpty from 'lodash/isEmpty';
@@ -44,6 +43,13 @@ const EditUser = ({
       handleBack();
     }
 
+    const validateEmail = current => {
+      const newEmail = current.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+      setEmail(get(newEmail, '0'));
+    };    
+
     return (
       <Container
       className="container table-responsive py-5 d-flex justify-content-center"
@@ -56,7 +62,7 @@ const EditUser = ({
           </FormGroup>
           <FormGroup className="mb-2 mt-2">
             <Label className="mb-2" for="Email">Email</Label>
-            <Input type="text" name="Email" id="Email" placeholder="Edit email" value={email} onChange={e => setEmail(e.target.value)}/>
+            <Input type="text" name="Email" id="Email" placeholder="Edit email" value={email} onChange={e => validateEmail(e.target.value)}/>
           </FormGroup>
           <FormGroup className="mb-2 mt-2">
             <Label className="mb-2" for="Username">Username</Label>

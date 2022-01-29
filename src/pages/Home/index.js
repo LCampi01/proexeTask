@@ -18,7 +18,7 @@ const headers = [
     {label: 'Delete'}
 ];
 
-const {loadUserDataRequested, getUserToEdit, deleteUserRequested} = SessionActions;
+const {loadUserDataRequested, getUserToEdit, deleteUserRequested, sortUsernameRequested} = SessionActions;
 
 const mapStateToProps = state => {
     const users = fromState.Session.getUsers(state);
@@ -32,7 +32,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => bindActionCreators({
     loadUserDataRequested,
     getUserToEdit,
-    deleteUserRequested
+    deleteUserRequested,
+    sortUsernameRequested
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {

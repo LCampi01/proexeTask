@@ -23,7 +23,8 @@ import {
     ADD_USER_REQUESTED,
     LOAD_USER_DATA_REQUESTED,
     EDIT_USER_REQUESTED,
-    DELETE_USER_REQUESTED
+    DELETE_USER_REQUESTED,
+    SORT_USERNAME_REQUESTED
 } from './types';
 
 import {
@@ -31,11 +32,11 @@ import {
     loadUserDataSucceded,
     addUserSucceeded,
     editUserSucceeded,
-    deleteUserSucceeded
+    deleteUserSucceeded,
+    sortUsernameSucceded
 } from './actions';
 
 import cloneDeep from 'lodash/cloneDeep'
-import size from 'lodash/size';
 import isEmpty from 'lodash/isEmpty';
 import remove from 'lodash/remove';
 import orderBy from 'lodash/orderBy';
@@ -53,11 +54,18 @@ async function fetchUser() {
     })
 }
 
+const orderUsers = listOfUsers => orderBy(listOfUsers, 'id')
+
 function* loadUserDataRequested() {
     try {
-        const users = yield call(fetchUser);
-        yield localStorage.setItem('flag', '1');
-        yield put(loadUserDataSucceded(users));
+        if(localStorage.getItem('flag') === '1') {
+            yield put(loadUserDataSucceded(JSON.parse(localStorage.getItem('users'))));
+        } else {
+            const users = yield call(fetchUser);
+            yield localStorage.setItem('flag', '1');
+            yield localStorage.setItem('users', JSON.stringify(users));
+            yield put(loadUserDataSucceded(users));
+        }
     } catch (error) {
         yield put(handleError(error));
     }
@@ -71,7 +79,9 @@ try {
     }
     const newUsers = remove(users, u => u.id !== user.id);
     newUsers.push(user);
-    yield put(editUserSucceeded(orderBy(newUsers, 'id')));
+    const listOfUsers = orderUsers(newUsers)
+    yield localStorage.setItem('users', JSON.stringify(listOfUsers));
+    yield put(editUserSucceeded(listOfUsers));
 } catch (error) {
     yield put(handleError(error));
 }
@@ -93,6 +103,7 @@ try {
         username
     }
     users.push(newUser);
+    yield localStorage.setItem('users', JSON.stringify(users));
     yield put(addUserSucceeded(users));
 } catch (error) {
     yield put(handleError(error));
@@ -106,7 +117,30 @@ function* deleteUserRequested({user}) {
             users = cloneDeep(yield call(fetchUser));
         }
         const newUsers = remove(users, u => u.id !== user.id);
-        yield put(editUserSucceeded(orderBy(newUsers, 'id')));
+        const listOfUsers = orderUsers(newUsers)
+        yield localStorage.setItem('users', JSON.stringify(listOfUsers));
+        yield put(deleteUserSucceeded(listOfUsers));
+    } catch (error) {
+        yield put(handleError(error));
+    }
+    }
+
+function* sortUsernameRequested({param}) {
+    try {
+        let users = cloneDeep(yield select(state => fromState.Session.getUsers(state)));
+        if(isEmpty(users)) {
+            users = cloneDeep(yield call(fetchUser));
+        }
+        if(param === 1) {
+            users = orderBy(users, 'username');
+        }
+        else if(param === 2) {
+            users = orderBy(users, 'username', 'desc');
+        }
+        else {
+            users = orderBy(users, 'id');
+        }
+        yield put(sortUsernameSucceded(users));
     } catch (error) {
         yield put(handleError(error));
     }
@@ -117,6 +151,7 @@ export default function* sessionSaga() {
         takeLatest(LOAD_USER_DATA_REQUESTED, loadUserDataRequested),
         takeLatest(ADD_USER_REQUESTED, addUserRequested),
         takeLatest(EDIT_USER_REQUESTED, editUserRequested),
-        takeLatest(DELETE_USER_REQUESTED, deleteUserRequested)
+        takeLatest(DELETE_USER_REQUESTED, deleteUserRequested),
+        takeLatest(SORT_USERNAME_REQUESTED, sortUsernameRequested)
     ]);
 }

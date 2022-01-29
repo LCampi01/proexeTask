@@ -1,16 +1,11 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 import {
-    Input,
     Button,
-    Label,
     Row,
-    Col,
-    Container,
-    Card,
-    CardBody
+    Col
 } from 'reactstrap';
 import TableList from '@components/TableList';
 
@@ -20,13 +15,16 @@ const Dashboard = ({
     users,
     columns,
     headers,
-    loadUserDataRequested
+    loadUserDataRequested,
+    sortUsernameRequested
 }) => {
 
   let history = useHistory()
+
+  const [param, setParam] = useState(1)
   
   useEffect(() => {
-      if(localStorage.getItem('flag') !== '1' || isEmpty(users)) {
+      if(isEmpty(users)) {
         loadUserDataRequested();
       }
   }, []);
@@ -35,11 +33,34 @@ const Dashboard = ({
     history.push("/AddUser");
   }
 
+  const sortUsername = () => {
+      sortUsernameRequested(param);
+      if(param === 2) setParam(0)
+      else setParam(param+1);
+  }
+
     return (
       <>
           <Row className="mx-auto mb-3 mt-3">
             <Col>
               <h3 className="mb-2 mt-2">User list</h3>
+            </Col>
+            <Col className="m-0">
+            {param === 1 && (
+              <Button color="warning" className="fw-bold" onClick={() => sortUsername()}>
+                Sort username from A to Z
+              </Button>
+            )}
+            {param === 2 && (
+              <Button color="warning" className="fw-bold" onClick={() => sortUsername()}>
+                Sort username from Z to A
+              </Button>
+            )}
+            {param === 0 && (
+              <Button color="warning" className="fw-bold" onClick={() => sortUsername()}>
+                Return to initial sort
+              </Button>
+            )}
             </Col>
             <Col>
               <div className="d-flex justify-content-end">

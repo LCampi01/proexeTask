@@ -10,6 +10,8 @@ import {
     EDIT_USER_SUCCEDED,
     DELETE_USER_REQUESTED,
     DELETE_USER_SUCCEDED,
+    SORT_USERNAME_REQUESTED,
+    SORT_USERNAME_SUCCEDED,
     ERROR_OCCURRED
 } from './types';
 
@@ -27,3 +29,5 @@ export const editUserRequested = user => ({type: EDIT_USER_REQUESTED, user});
 export const editUserSucceeded = users => ({type: EDIT_USER_SUCCEDED, users});
 export const deleteUserRequested = user => ({type: DELETE_USER_REQUESTED, user});
 export const deleteUserSucceeded = users => ({type: DELETE_USER_SUCCEDED, users});
+export const sortUsernameRequested = param => ({type: SORT_USERNAME_REQUESTED, param});
+export const sortUsernameSucceded = users => ({type: SORT_USERNAME_SUCCEDED, users});
